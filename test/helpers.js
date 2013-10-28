@@ -1,7 +1,7 @@
-function createPeopleTable(pg, callback) {
-  pg.query('CREATE TEMP TABLE sqlbox_test_people (' +
+function createPeopleTable(mysql, callback) {
+  mysql.query('CREATE TABLE IF NOT EXISTS sqlbox_test_people (' +
     'id SERIAL PRIMARY KEY,' +
-    'name TEXT UNIQUE,' +
+    'name VARCHAR(255) UNIQUE,' +
     'age INTEGER,' +
     'accountId INTEGER,' +
     'hashed_password TEXT,' +
@@ -11,8 +11,8 @@ function createPeopleTable(pg, callback) {
   ');', callback);
 }
 
-function dropPeopleTable(pg, callback) {
-  pg.query('DROP TABLE IF EXISTS sqlbox_test_people;', callback);
+function dropPeopleTable(mysql, callback) {
+  mysql.query('DROP TABLE IF EXISTS sqlbox_test_people;', callback);
 }
 
 

@@ -45,10 +45,12 @@ describe('sqlbox model without client', function () {
 describe('sqlbox model', function () {
 
   beforeEach(function (done) {
-    sqlbox.createClient(function (pg) {
-      var user = process.env.DATABASE_USER ? process.env.DATABASE_USER + ':@' : '';
-
-      return new pg.Client('postgres://' + user + 'localhost/' + (process.env.DATABASE_NAME || process.env.USER));
+    sqlbox.createClient(function (mysql) {
+      return mysql.createConnection({
+        user: 'root',
+        database: 'sqlbox_test',
+        multipleStatements: true
+      });
     });
 
     helpers.createPeopleTable(sqlbox.clients.default, done);
